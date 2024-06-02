@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listener for the play/pause button
     playPauseButton.addEventListener('click', togglePlayPause);
 
-    // Countdown Timer
+    // .........................................Countdown Timer
     function calculateCountdown() {
         const weddingDate = new Date('2024-06-15'); // Set your wedding date here
         const currentDate = new Date();
@@ -73,34 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
     setInterval(calculateCountdown, 1000);
     calculateCountdown();
 
-    // Function to check if an element is in the viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
 
-    // Function to add the float-in animation class to elements in the viewport
-    function floatInSection() {
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
-            if (isInViewport(section)) {
-                section.classList.add('float-in');
-            }
-        });
-    }
-
-    // Event listener for scroll event
-    document.addEventListener('scroll', floatInSection);
-
-    // Initial float-in animation for elements in viewport on page load
-    floatInSection();
-
-    // Function to copy account details
+    // ...................................Function to copy account details
     function copyAccountDetails() {
         const accountDetails = document.querySelector('.bank-number').innerText;
         navigator.clipboard.writeText(accountDetails)
@@ -112,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-    // Event listener for message form submission
+    // ..........................................Event listener for message form submission
     document.getElementById('messageForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -128,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Function to add messages to the message list
+    //................................... Function to add messages to the message list
     function addMessage(name, message) {
         const messageList = document.getElementById('messageList');
 
@@ -145,4 +119,27 @@ document.addEventListener("DOMContentLoaded", function() {
         messageDiv.appendChild(messageText);
         messageList.appendChild(messageDiv);
     }
+});
+
+//................................................. function to show animation 
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    const elements = document.querySelectorAll('.fade-in, .fade-slide');
+    elements.forEach(element => {
+        observer.observe(element);
+    });
 });
