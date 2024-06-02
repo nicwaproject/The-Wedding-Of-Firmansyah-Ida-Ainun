@@ -98,3 +98,38 @@ document.addEventListener("DOMContentLoaded", function() {
         observer.observe(element);
     });
 });
+
+// Event listener for message form submission
+    document.getElementById('messageForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('formGuestName').value;
+        const message = document.getElementById('guestMessage').value;
+
+        if (name && message) {
+            addMessage(name, message);
+
+            // Clear the form fields
+            document.getElementById('formGuestName').value = '';
+            document.getElementById('guestMessage').value = '';
+        }
+    });
+
+    // Function to add messages to the message list
+    function addMessage(name, message) {
+        const messageList = document.getElementById('messageList');
+
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+
+        const messageName = document.createElement('h3');
+        messageName.textContent = name;
+
+        const messageText = document.createElement('p');
+        messageText.textContent = message;
+
+        messageDiv.appendChild(messageName);
+        messageDiv.appendChild(messageText);
+        messageList.appendChild(messageDiv);
+    }
+});
