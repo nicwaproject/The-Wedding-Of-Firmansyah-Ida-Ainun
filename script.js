@@ -7,19 +7,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Set couple names from URL parameter or use default
     const coupleNames = getQueryParameter('couple');
-    if (coupleNames) {
-        document.getElementById('coupleNames').textContent = coupleNames;
-    } else {
-        document.getElementById('coupleNames').textContent = 'Imam & Ainun'; // Default names
-    }
+    document.getElementById('coupleNames').textContent = coupleNames || 'Imam & Ainun'; // Default names
 
     // Set guest name from URL parameter or use default
     const guestName = getQueryParameter('guest');
-    if (guestName) {
-        document.getElementById('guestName').textContent = guestName;
-    } else {
-        document.getElementById('guestName').textContent = 'Guest';
-    }
+    document.getElementById('guestName').textContent = guestName || 'Guest';
 
     // Variables for the invitation and music
     const openButton = document.getElementById('openButton');
@@ -42,18 +34,17 @@ document.addEventListener("DOMContentLoaded", function() {
     function togglePlayPause() {
         if (isPlaying) {
             backgroundMusic.pause();
-            playPauseButton.src = 'play.png'; // Change this to the path of your play button image
         } else {
             backgroundMusic.play();
-            playPauseButton.src = 'pause.png'; // Change this to the path of your pause button image
         }
         isPlaying = !isPlaying;
+        playPauseButton.src = isPlaying ? 'pause.png' : 'play.png'; // Change this to the path of your play and pause button images
     }
 
     // Event listener for the play/pause button
     playPauseButton.addEventListener('click', togglePlayPause);
 
-    // .........................................Countdown Timer
+    // Countdown Timer
     function calculateCountdown() {
         const weddingDate = new Date('2024-06-15'); // Set your wedding date here
         const currentDate = new Date();
@@ -73,8 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setInterval(calculateCountdown, 1000);
     calculateCountdown();
 
-
-    // ...................................Function to copy account details
+    // Function to copy account details
     function copyAccountDetails() {
         const accountDetails = document.querySelector('.bank-number').innerText;
         navigator.clipboard.writeText(accountDetails)
@@ -86,42 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-    // ..........................................Event listener for message form submission
-    document.getElementById('messageForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const name = document.getElementById('formGuestName').value;
-        const message = document.getElementById('guestMessage').value;
-
-        if (name && message) {
-            addMessage(name, message);
-
-            // Clear the form fields
-            document.getElementById('formGuestName').value = '';
-            document.getElementById('guestMessage').value = '';
-        }
-    });
-
-    //................................... Function to add messages to the message list
-    function addMessage(name, message) {
-        const messageList = document.getElementById('messageList');
-
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message');
-
-        const messageName = document.createElement('h3');
-        messageName.textContent = name;
-
-        const messageText = document.createElement('p');
-        messageText.textContent = message;
-
-        messageDiv.appendChild(messageName);
-        messageDiv.appendChild(messageText);
-        messageList.appendChild(messageDiv);
-    }
-});
-
-//................................................. function to show animation 
+    // function to show animation 
     const observerOptions = {
         root: null,
         rootMargin: '0px',
