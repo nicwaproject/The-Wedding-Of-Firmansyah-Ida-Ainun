@@ -506,18 +506,6 @@ button:hover {
     opacity: 1;
     transform: translateY(0);
 }
-
-/* Common animation class */
-.fade-in {
-    animation: fadeIn 5s ease-out forwards;
-}
-
-.float-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: floatIn 5s ease-out forwards;
-}
-
 /* .....................AUDIO CONTROL.................... */
 .audio-controls {
     position: fixed;
